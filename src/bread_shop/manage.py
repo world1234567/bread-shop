@@ -1,5 +1,4 @@
 #  -*- coding: utf-8 -*-
-from framework import app
 from views import *
 
 
