@@ -1,8 +1,8 @@
 #  -*- coding: utf-8 -*-
-from apps.views import *
+import os
+from app import create_app
 
 
 if __name__ == '__main__':
-    app.debug = True
-    # app.run(host='0.0.0.0', port=8088, debug=True)
+    app = create_app(os.getenv('FLASK_CONFIG') or 'dev')
     app.run()
