@@ -1,5 +1,6 @@
 #  -*- coding: utf-8 -*-
 from framework import app
+from views import *
 
 
 if __name__ == '__main__':
