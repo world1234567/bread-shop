@@ -1,5 +1,5 @@
 #  -*- coding: utf-8 -*-
-from views import *
+from apps.views import *
 
 
 if __name__ == '__main__':
