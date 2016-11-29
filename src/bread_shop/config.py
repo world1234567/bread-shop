@@ -2,27 +2,30 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SECRET_KEY = 'abcd0123'
     SSL_DISABLE = False
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_RECORD_QUERIES = True
-    FLASKY_POSTS_PER_PAGE = 20
-    FLASKY_FOLLOWERS_PER_PAGE = 50
-    FLASKY_COMMENTS_PER_PAGE = 30
-    FLASKY_SLOW_DB_QUERY_TIME=0.5
 
 class DevelopmentConfig(Config):
+    __SQL_PARAMS = {
+        'passwd': 'a123456',
+        'host': '127.0.0.1',
+        'db': 'mytest',
+        'port': 3306,
+        'user': 'root',
+    }
+
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://%s:%s@%s:%s/%s" % ( __SQL_PARAMS['user'], __SQL_PARAMS['passwd'], __SQL_PARAMS['host'], __SQL_PARAMS['port'], __SQL_PARAMS['db'])
+
     DEBUG = True
 
 
 class TestingConfig(Config):
+    TESTING=True
     pass
 
 class ProductionConfig(Config):
     
     pass
-
-
 
 
 config = {
