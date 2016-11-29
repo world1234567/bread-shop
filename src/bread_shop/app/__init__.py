@@ -1,20 +1,19 @@
 #  -*- coding: utf-8 -*-
 from flask import Flask
-
-from app.database import db_session
-from app.main import main
+from flask_sqlalchemy import SQLAlchemy
 from config import config
+
+db = SQLAlchemy()
 
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
-    @app.teardown_request
-    def shutdown_session(exception=None):
-        db_session.remove()
+    db.init_app(app)
 
+    #注册蓝图
+    from .main import main
     app.register_blueprint(main)
-
     #生产环境处理未知的异常
     if not app.debug:
         import logging

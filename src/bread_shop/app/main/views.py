@@ -1,14 +1,12 @@
 #  -*- coding: utf-8 -*-
-from . import main
+from app.main import main
 from flask import render_template
-from app.database import db_session
 from app.models import User
-
-
+from .. import db
 
 @main.route('/')
 def index():
     admin = User('admin', 'admin@example.com')
-    db_session.add(admin)
-    db_session.commit()
+    db.session.add(admin)
+    db.session.commit()
     return render_template('main/index.html')
